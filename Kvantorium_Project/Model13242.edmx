@@ -1,0 +1,588 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Kvantorium_ProjectModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Autorization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdReg" Type="int" Nullable="false" />
+          <Property Name="Login" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="TypeUser" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="GetOborudovanie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPostav" Type="int" Nullable="false" />
+          <Property Name="IdSotr" Type="int" Nullable="false" />
+          <Property Name="IdObor" Type="int" Nullable="false" />
+          <Property Name="Price" Type="nvarchar(max)" />
+          <Property Name="DateVid" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Oborud">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Price" Type="nvarchar(max)" />
+          <Property Name="ColOb" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="PeredachaOborud">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFirstSotr" Type="int" Nullable="false" />
+          <Property Name="IdSecondSotr" Type="int" Nullable="false" />
+          <Property Name="IdObor" Type="int" Nullable="false" />
+          <Property Name="PurposePeredacha" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Postav">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="MiddleName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="TimeWork" Type="nvarchar(max)" />
+          <Property Name="MediumPrice" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Login" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Sotrud">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="MiddleName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="Position" Type="nvarchar(max)" />
+          <Property Name="TimeWork" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UchetPostav">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdPostav" Type="int" Nullable="false" />
+          <Property Name="Oborud" Type="nvarchar(max)" />
+          <Property Name="DatePostav" Type="nvarchar(max)" />
+          <Property Name="Price" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_Autorization_Registration1">
+          <End Role="Registration" Type="Self.Registration" Multiplicity="1" />
+          <End Role="Autorization" Type="Self.Autorization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Autorization">
+              <PropertyRef Name="IdReg" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GetOborudovanie_Oborud">
+          <End Role="Oborud" Type="Self.Oborud" Multiplicity="1" />
+          <End Role="GetOborudovanie" Type="Self.GetOborudovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oborud">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GetOborudovanie">
+              <PropertyRef Name="IdObor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GetOborudovanie_Postav">
+          <End Role="Postav" Type="Self.Postav" Multiplicity="1" />
+          <End Role="GetOborudovanie" Type="Self.GetOborudovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postav">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GetOborudovanie">
+              <PropertyRef Name="IdPostav" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GetOborudovanie_Sotrud">
+          <End Role="Sotrud" Type="Self.Sotrud" Multiplicity="1" />
+          <End Role="GetOborudovanie" Type="Self.GetOborudovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrud">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GetOborudovanie">
+              <PropertyRef Name="IdSotr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PeredachaOborud_Oborud">
+          <End Role="Oborud" Type="Self.Oborud" Multiplicity="1" />
+          <End Role="PeredachaOborud" Type="Self.PeredachaOborud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oborud">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PeredachaOborud">
+              <PropertyRef Name="IdObor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PeredachaOborud_Sotrud">
+          <End Role="Sotrud" Type="Self.Sotrud" Multiplicity="1" />
+          <End Role="PeredachaOborud" Type="Self.PeredachaOborud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrud">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PeredachaOborud">
+              <PropertyRef Name="IdFirstSotr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PeredachaOborud_Sotrud1">
+          <End Role="Sotrud" Type="Self.Sotrud" Multiplicity="1" />
+          <End Role="PeredachaOborud" Type="Self.PeredachaOborud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrud">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PeredachaOborud">
+              <PropertyRef Name="IdSecondSotr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UchetPostav_Postav">
+          <End Role="Postav" Type="Self.Postav" Multiplicity="1" />
+          <End Role="UchetPostav" Type="Self.UchetPostav" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postav">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UchetPostav">
+              <PropertyRef Name="IdPostav" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Kvantorium_ProjectModelContainer">
+          <EntitySet Name="Autorization" EntityType="Self.Autorization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GetOborudovanie" EntityType="Self.GetOborudovanie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Oborud" EntityType="Self.Oborud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PeredachaOborud" EntityType="Self.PeredachaOborud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Postav" EntityType="Self.Postav" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registration" EntityType="Self.Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sotrud" EntityType="Self.Sotrud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UchetPostav" EntityType="Self.UchetPostav" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Autorization_Registration1" Association="Self.FK_Autorization_Registration1">
+            <End Role="Registration" EntitySet="Registration" />
+            <End Role="Autorization" EntitySet="Autorization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GetOborudovanie_Oborud" Association="Self.FK_GetOborudovanie_Oborud">
+            <End Role="Oborud" EntitySet="Oborud" />
+            <End Role="GetOborudovanie" EntitySet="GetOborudovanie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GetOborudovanie_Postav" Association="Self.FK_GetOborudovanie_Postav">
+            <End Role="Postav" EntitySet="Postav" />
+            <End Role="GetOborudovanie" EntitySet="GetOborudovanie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GetOborudovanie_Sotrud" Association="Self.FK_GetOborudovanie_Sotrud">
+            <End Role="Sotrud" EntitySet="Sotrud" />
+            <End Role="GetOborudovanie" EntitySet="GetOborudovanie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PeredachaOborud_Oborud" Association="Self.FK_PeredachaOborud_Oborud">
+            <End Role="Oborud" EntitySet="Oborud" />
+            <End Role="PeredachaOborud" EntitySet="PeredachaOborud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PeredachaOborud_Sotrud" Association="Self.FK_PeredachaOborud_Sotrud">
+            <End Role="Sotrud" EntitySet="Sotrud" />
+            <End Role="PeredachaOborud" EntitySet="PeredachaOborud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PeredachaOborud_Sotrud1" Association="Self.FK_PeredachaOborud_Sotrud1">
+            <End Role="Sotrud" EntitySet="Sotrud" />
+            <End Role="PeredachaOborud" EntitySet="PeredachaOborud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UchetPostav_Postav" Association="Self.FK_UchetPostav_Postav">
+            <End Role="Postav" EntitySet="Postav" />
+            <End Role="UchetPostav" EntitySet="UchetPostav" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Kvantorium_ProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Autorization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdReg" Type="Int32" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TypeUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Registration" Relationship="Self.FK_Autorization_Registration1" FromRole="Autorization" ToRole="Registration" />
+        </EntityType>
+        <EntityType Name="GetOborudovanie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPostav" Type="Int32" Nullable="false" />
+          <Property Name="IdSotr" Type="Int32" Nullable="false" />
+          <Property Name="IdObor" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateVid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Oborud" Relationship="Self.FK_GetOborudovanie_Oborud" FromRole="GetOborudovanie" ToRole="Oborud" />
+          <NavigationProperty Name="Postav" Relationship="Self.FK_GetOborudovanie_Postav" FromRole="GetOborudovanie" ToRole="Postav" />
+          <NavigationProperty Name="Sotrud" Relationship="Self.FK_GetOborudovanie_Sotrud" FromRole="GetOborudovanie" ToRole="Sotrud" />
+        </EntityType>
+        <EntityType Name="Oborud">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ColOb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GetOborudovanie" Relationship="Self.FK_GetOborudovanie_Oborud" FromRole="Oborud" ToRole="GetOborudovanie" />
+          <NavigationProperty Name="PeredachaOborud" Relationship="Self.FK_PeredachaOborud_Oborud" FromRole="Oborud" ToRole="PeredachaOborud" />
+        </EntityType>
+        <EntityType Name="PeredachaOborud">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFirstSotr" Type="Int32" Nullable="false" />
+          <Property Name="IdSecondSotr" Type="Int32" Nullable="false" />
+          <Property Name="IdObor" Type="Int32" Nullable="false" />
+          <Property Name="PurposePeredacha" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Oborud" Relationship="Self.FK_PeredachaOborud_Oborud" FromRole="PeredachaOborud" ToRole="Oborud" />
+          <NavigationProperty Name="Sotrud" Relationship="Self.FK_PeredachaOborud_Sotrud" FromRole="PeredachaOborud" ToRole="Sotrud" />
+          <NavigationProperty Name="Sotrud1" Relationship="Self.FK_PeredachaOborud_Sotrud1" FromRole="PeredachaOborud" ToRole="Sotrud" />
+        </EntityType>
+        <EntityType Name="Postav">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeWork" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MediumPrice" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GetOborudovanie" Relationship="Self.FK_GetOborudovanie_Postav" FromRole="Postav" ToRole="GetOborudovanie" />
+          <NavigationProperty Name="UchetPostav" Relationship="Self.FK_UchetPostav_Postav" FromRole="Postav" ToRole="UchetPostav" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Autorization" Relationship="Self.FK_Autorization_Registration1" FromRole="Registration" ToRole="Autorization" />
+        </EntityType>
+        <EntityType Name="Sotrud">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeWork" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GetOborudovanie" Relationship="Self.FK_GetOborudovanie_Sotrud" FromRole="Sotrud" ToRole="GetOborudovanie" />
+          <NavigationProperty Name="PeredachaOborud" Relationship="Self.FK_PeredachaOborud_Sotrud" FromRole="Sotrud" ToRole="PeredachaOborud" />
+          <NavigationProperty Name="PeredachaOborud1" Relationship="Self.FK_PeredachaOborud_Sotrud1" FromRole="Sotrud" ToRole="PeredachaOborud" />
+        </EntityType>
+        <EntityType Name="UchetPostav">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdPostav" Type="Int32" Nullable="false" />
+          <Property Name="Oborud" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DatePostav" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Postav" Relationship="Self.FK_UchetPostav_Postav" FromRole="UchetPostav" ToRole="Postav" />
+        </EntityType>
+        <Association Name="FK_Autorization_Registration1">
+          <End Role="Registration" Type="Self.Registration" Multiplicity="1" />
+          <End Role="Autorization" Type="Self.Autorization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Autorization">
+              <PropertyRef Name="IdReg" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GetOborudovanie_Oborud">
+          <End Role="Oborud" Type="Self.Oborud" Multiplicity="1" />
+          <End Role="GetOborudovanie" Type="Self.GetOborudovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oborud">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GetOborudovanie">
+              <PropertyRef Name="IdObor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GetOborudovanie_Postav">
+          <End Role="Postav" Type="Self.Postav" Multiplicity="1" />
+          <End Role="GetOborudovanie" Type="Self.GetOborudovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postav">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GetOborudovanie">
+              <PropertyRef Name="IdPostav" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GetOborudovanie_Sotrud">
+          <End Role="Sotrud" Type="Self.Sotrud" Multiplicity="1" />
+          <End Role="GetOborudovanie" Type="Self.GetOborudovanie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrud">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GetOborudovanie">
+              <PropertyRef Name="IdSotr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PeredachaOborud_Oborud">
+          <End Role="Oborud" Type="Self.Oborud" Multiplicity="1" />
+          <End Role="PeredachaOborud" Type="Self.PeredachaOborud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Oborud">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PeredachaOborud">
+              <PropertyRef Name="IdObor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PeredachaOborud_Sotrud">
+          <End Role="Sotrud" Type="Self.Sotrud" Multiplicity="1" />
+          <End Role="PeredachaOborud" Type="Self.PeredachaOborud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrud">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PeredachaOborud">
+              <PropertyRef Name="IdFirstSotr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PeredachaOborud_Sotrud1">
+          <End Role="Sotrud" Type="Self.Sotrud" Multiplicity="1" />
+          <End Role="PeredachaOborud" Type="Self.PeredachaOborud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrud">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PeredachaOborud">
+              <PropertyRef Name="IdSecondSotr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UchetPostav_Postav">
+          <End Role="Postav" Type="Self.Postav" Multiplicity="1" />
+          <End Role="UchetPostav" Type="Self.UchetPostav" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postav">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UchetPostav">
+              <PropertyRef Name="IdPostav" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Kvantorium_ProjectEntities15" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Autorization" EntityType="Self.Autorization" />
+          <EntitySet Name="GetOborudovanie" EntityType="Self.GetOborudovanie" />
+          <EntitySet Name="Oborud" EntityType="Self.Oborud" />
+          <EntitySet Name="PeredachaOborud" EntityType="Self.PeredachaOborud" />
+          <EntitySet Name="Postav" EntityType="Self.Postav" />
+          <EntitySet Name="Registration" EntityType="Self.Registration" />
+          <EntitySet Name="Sotrud" EntityType="Self.Sotrud" />
+          <EntitySet Name="UchetPostav" EntityType="Self.UchetPostav" />
+          <AssociationSet Name="FK_Autorization_Registration1" Association="Self.FK_Autorization_Registration1">
+            <End Role="Registration" EntitySet="Registration" />
+            <End Role="Autorization" EntitySet="Autorization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GetOborudovanie_Oborud" Association="Self.FK_GetOborudovanie_Oborud">
+            <End Role="Oborud" EntitySet="Oborud" />
+            <End Role="GetOborudovanie" EntitySet="GetOborudovanie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GetOborudovanie_Postav" Association="Self.FK_GetOborudovanie_Postav">
+            <End Role="Postav" EntitySet="Postav" />
+            <End Role="GetOborudovanie" EntitySet="GetOborudovanie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GetOborudovanie_Sotrud" Association="Self.FK_GetOborudovanie_Sotrud">
+            <End Role="Sotrud" EntitySet="Sotrud" />
+            <End Role="GetOborudovanie" EntitySet="GetOborudovanie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PeredachaOborud_Oborud" Association="Self.FK_PeredachaOborud_Oborud">
+            <End Role="Oborud" EntitySet="Oborud" />
+            <End Role="PeredachaOborud" EntitySet="PeredachaOborud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PeredachaOborud_Sotrud" Association="Self.FK_PeredachaOborud_Sotrud">
+            <End Role="Sotrud" EntitySet="Sotrud" />
+            <End Role="PeredachaOborud" EntitySet="PeredachaOborud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PeredachaOborud_Sotrud1" Association="Self.FK_PeredachaOborud_Sotrud1">
+            <End Role="Sotrud" EntitySet="Sotrud" />
+            <End Role="PeredachaOborud" EntitySet="PeredachaOborud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UchetPostav_Postav" Association="Self.FK_UchetPostav_Postav">
+            <End Role="Postav" EntitySet="Postav" />
+            <End Role="UchetPostav" EntitySet="UchetPostav" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Kvantorium_ProjectModelContainer" CdmEntityContainer="Kvantorium_ProjectEntities15">
+          <EntitySetMapping Name="Autorization">
+            <EntityTypeMapping TypeName="Kvantorium_ProjectModel.Autorization">
+              <MappingFragment StoreEntitySet="Autorization">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdReg" ColumnName="IdReg" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="TypeUser" ColumnName="TypeUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GetOborudovanie">
+            <EntityTypeMapping TypeName="Kvantorium_ProjectModel.GetOborudovanie">
+              <MappingFragment StoreEntitySet="GetOborudovanie">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdPostav" ColumnName="IdPostav" />
+                <ScalarProperty Name="IdSotr" ColumnName="IdSotr" />
+                <ScalarProperty Name="IdObor" ColumnName="IdObor" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="DateVid" ColumnName="DateVid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Oborud">
+            <EntityTypeMapping TypeName="Kvantorium_ProjectModel.Oborud">
+              <MappingFragment StoreEntitySet="Oborud">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ColOb" ColumnName="ColOb" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PeredachaOborud">
+            <EntityTypeMapping TypeName="Kvantorium_ProjectModel.PeredachaOborud">
+              <MappingFragment StoreEntitySet="PeredachaOborud">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdFirstSotr" ColumnName="IdFirstSotr" />
+                <ScalarProperty Name="IdSecondSotr" ColumnName="IdSecondSotr" />
+                <ScalarProperty Name="IdObor" ColumnName="IdObor" />
+                <ScalarProperty Name="PurposePeredacha" ColumnName="PurposePeredacha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Postav">
+            <EntityTypeMapping TypeName="Kvantorium_ProjectModel.Postav">
+              <MappingFragment StoreEntitySet="Postav">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="TimeWork" ColumnName="TimeWork" />
+                <ScalarProperty Name="MediumPrice" ColumnName="MediumPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registration">
+            <EntityTypeMapping TypeName="Kvantorium_ProjectModel.Registration">
+              <MappingFragment StoreEntitySet="Registration">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sotrud">
+            <EntityTypeMapping TypeName="Kvantorium_ProjectModel.Sotrud">
+              <MappingFragment StoreEntitySet="Sotrud">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="TimeWork" ColumnName="TimeWork" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UchetPostav">
+            <EntityTypeMapping TypeName="Kvantorium_ProjectModel.UchetPostav">
+              <MappingFragment StoreEntitySet="UchetPostav">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdPostav" ColumnName="IdPostav" />
+                <ScalarProperty Name="Oborud" ColumnName="Oborud" />
+                <ScalarProperty Name="DatePostav" ColumnName="DatePostav" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

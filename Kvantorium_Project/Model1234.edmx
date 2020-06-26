@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Kvantorium_ProjectModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="GetOborud">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPostav" Type="int" Nullable="false" />
+          <Property Name="IdSotr" Type="int" Nullable="false" />
+          <Property Name="IdObor" Type="int" />
+          <Property Name="Price" Type="nvarchar(max)" />
+          <Property Name="DateVid" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Postav">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="MiddleName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="TimeWork" Type="nvarchar(max)" />
+          <Property Name="MediumPrice" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Sotrud">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="MiddleName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="Position" Type="nvarchar(max)" />
+          <Property Name="TimeWork" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UchetPostav">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPostav" Type="int" Nullable="false" />
+          <Property Name="DatePostav" Type="nvarchar(max)" />
+          <Property Name="Price" Type="nvarchar(max)" />
+          <Property Name="Oborud" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_GetOborud_Postav">
+          <End Role="Postav" Type="Self.Postav" Multiplicity="1" />
+          <End Role="GetOborud" Type="Self.GetOborud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postav">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GetOborud">
+              <PropertyRef Name="IdPostav" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GetOborud_Sotrud">
+          <End Role="Sotrud" Type="Self.Sotrud" Multiplicity="1" />
+          <End Role="GetOborud" Type="Self.GetOborud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrud">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GetOborud">
+              <PropertyRef Name="IdSotr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GetOborud_UchetPostav">
+          <End Role="UchetPostav" Type="Self.UchetPostav" Multiplicity="0..1" />
+          <End Role="GetOborud" Type="Self.GetOborud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UchetPostav">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GetOborud">
+              <PropertyRef Name="IdObor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UchetPostav_Postav">
+          <End Role="Postav" Type="Self.Postav" Multiplicity="1" />
+          <End Role="UchetPostav" Type="Self.UchetPostav" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postav">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UchetPostav">
+              <PropertyRef Name="IdPostav" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Kvantorium_ProjectModelContainer">
+          <EntitySet Name="GetOborud" EntityType="Self.GetOborud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Postav" EntityType="Self.Postav" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sotrud" EntityType="Self.Sotrud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UchetPostav" EntityType="Self.UchetPostav" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_GetOborud_Postav" Association="Self.FK_GetOborud_Postav">
+            <End Role="Postav" EntitySet="Postav" />
+            <End Role="GetOborud" EntitySet="GetOborud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GetOborud_Sotrud" Association="Self.FK_GetOborud_Sotrud">
+            <End Role="Sotrud" EntitySet="Sotrud" />
+            <End Role="GetOborud" EntitySet="GetOborud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GetOborud_UchetPostav" Association="Self.FK_GetOborud_UchetPostav">
+            <End Role="UchetPostav" EntitySet="UchetPostav" />
+            <End Role="GetOborud" EntitySet="GetOborud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UchetPostav_Postav" Association="Self.FK_UchetPostav_Postav">
+            <End Role="Postav" EntitySet="Postav" />
+            <End Role="UchetPostav" EntitySet="UchetPostav" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Kvantorium_ProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="GetOborud">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPostav" Type="Int32" Nullable="false" />
+          <Property Name="IdSotr" Type="Int32" Nullable="false" />
+          <Property Name="IdObor" Type="Int32" />
+          <Property Name="Price" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateVid" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Postav" Relationship="Self.FK_GetOborud_Postav" FromRole="GetOborud" ToRole="Postav" />
+          <NavigationProperty Name="Sotrud" Relationship="Self.FK_GetOborud_Sotrud" FromRole="GetOborud" ToRole="Sotrud" />
+          <NavigationProperty Name="UchetPostav" Relationship="Self.FK_GetOborud_UchetPostav" FromRole="GetOborud" ToRole="UchetPostav" />
+        </EntityType>
+        <EntityType Name="Postav">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeWork" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MediumPrice" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GetOborud" Relationship="Self.FK_GetOborud_Postav" FromRole="Postav" ToRole="GetOborud" />
+          <NavigationProperty Name="UchetPostav" Relationship="Self.FK_UchetPostav_Postav" FromRole="Postav" ToRole="UchetPostav" />
+        </EntityType>
+        <EntityType Name="Sotrud">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeWork" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GetOborud" Relationship="Self.FK_GetOborud_Sotrud" FromRole="Sotrud" ToRole="GetOborud" />
+        </EntityType>
+        <EntityType Name="UchetPostav">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPostav" Type="Int32" Nullable="false" />
+          <Property Name="DatePostav" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Oborud" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GetOborud" Relationship="Self.FK_GetOborud_UchetPostav" FromRole="UchetPostav" ToRole="GetOborud" />
+          <NavigationProperty Name="Postav" Relationship="Self.FK_UchetPostav_Postav" FromRole="UchetPostav" ToRole="Postav" />
+        </EntityType>
+        <Association Name="FK_GetOborud_Postav">
+          <End Role="Postav" Type="Self.Postav" Multiplicity="1" />
+          <End Role="GetOborud" Type="Self.GetOborud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postav">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GetOborud">
+              <PropertyRef Name="IdPostav" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GetOborud_Sotrud">
+          <End Role="Sotrud" Type="Self.Sotrud" Multiplicity="1" />
+          <End Role="GetOborud" Type="Self.GetOborud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sotrud">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GetOborud">
+              <PropertyRef Name="IdSotr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GetOborud_UchetPostav">
+          <End Role="UchetPostav" Type="Self.UchetPostav" Multiplicity="0..1" />
+          <End Role="GetOborud" Type="Self.GetOborud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UchetPostav">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GetOborud">
+              <PropertyRef Name="IdObor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UchetPostav_Postav">
+          <End Role="Postav" Type="Self.Postav" Multiplicity="1" />
+          <End Role="UchetPostav" Type="Self.UchetPostav" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postav">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UchetPostav">
+              <PropertyRef Name="IdPostav" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Kvantorium_ProjectEntities7" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="GetOborud" EntityType="Self.GetOborud" />
+          <EntitySet Name="Postav" EntityType="Self.Postav" />
+          <EntitySet Name="Sotrud" EntityType="Self.Sotrud" />
+          <EntitySet Name="UchetPostav" EntityType="Self.UchetPostav" />
+          <AssociationSet Name="FK_GetOborud_Postav" Association="Self.FK_GetOborud_Postav">
+            <End Role="Postav" EntitySet="Postav" />
+            <End Role="GetOborud" EntitySet="GetOborud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GetOborud_Sotrud" Association="Self.FK_GetOborud_Sotrud">
+            <End Role="Sotrud" EntitySet="Sotrud" />
+            <End Role="GetOborud" EntitySet="GetOborud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GetOborud_UchetPostav" Association="Self.FK_GetOborud_UchetPostav">
+            <End Role="UchetPostav" EntitySet="UchetPostav" />
+            <End Role="GetOborud" EntitySet="GetOborud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UchetPostav_Postav" Association="Self.FK_UchetPostav_Postav">
+            <End Role="Postav" EntitySet="Postav" />
+            <End Role="UchetPostav" EntitySet="UchetPostav" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Kvantorium_ProjectModelContainer" CdmEntityContainer="Kvantorium_ProjectEntities7">
+          <EntitySetMapping Name="GetOborud">
+            <EntityTypeMapping TypeName="Kvantorium_ProjectModel.GetOborud">
+              <MappingFragment StoreEntitySet="GetOborud">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdPostav" ColumnName="IdPostav" />
+                <ScalarProperty Name="IdSotr" ColumnName="IdSotr" />
+                <ScalarProperty Name="IdObor" ColumnName="IdObor" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="DateVid" ColumnName="DateVid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Postav">
+            <EntityTypeMapping TypeName="Kvantorium_ProjectModel.Postav">
+              <MappingFragment StoreEntitySet="Postav">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="TimeWork" ColumnName="TimeWork" />
+                <ScalarProperty Name="MediumPrice" ColumnName="MediumPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sotrud">
+            <EntityTypeMapping TypeName="Kvantorium_ProjectModel.Sotrud">
+              <MappingFragment StoreEntitySet="Sotrud">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="TimeWork" ColumnName="TimeWork" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UchetPostav">
+            <EntityTypeMapping TypeName="Kvantorium_ProjectModel.UchetPostav">
+              <MappingFragment StoreEntitySet="UchetPostav">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdPostav" ColumnName="IdPostav" />
+                <ScalarProperty Name="DatePostav" ColumnName="DatePostav" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Oborud" ColumnName="Oborud" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

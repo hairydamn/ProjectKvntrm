@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e7fe9357281947559cac8a958443ae68" Name="Diagram1">
+        <EntityTypeShape EntityType="Kvantorium_ProjectModel.GetOborudovanie" Width="1.5" PointX="5.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kvantorium_ProjectModel.Oborud" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kvantorium_ProjectModel.PeredachaOborud" Width="1.5" PointX="9" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kvantorium_ProjectModel.Postav" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kvantorium_ProjectModel.Sotrud" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kvantorium_ProjectModel.UchetPostav" Width="1.5" PointX="7.625" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="Kvantorium_ProjectModel.FK_GetOborudovanie_Oborud" ManuallyRouted="false" />
+        <AssociationConnector Association="Kvantorium_ProjectModel.FK_GetOborudovanie_Postav" ManuallyRouted="false" />
+        <AssociationConnector Association="Kvantorium_ProjectModel.FK_GetOborudovanie_Sotrud" ManuallyRouted="false" />
+        <AssociationConnector Association="Kvantorium_ProjectModel.FK_PeredachaOborud_Oborud" ManuallyRouted="false" />
+        <AssociationConnector Association="Kvantorium_ProjectModel.FK_PeredachaOborud_Sotrud" ManuallyRouted="false" />
+        <AssociationConnector Association="Kvantorium_ProjectModel.FK_PeredachaOborud_Sotrud1" ManuallyRouted="false" />
+        <AssociationConnector Association="Kvantorium_ProjectModel.FK_UchetPostav_Postav" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

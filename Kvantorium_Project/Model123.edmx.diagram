@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="64eeafc593f743a0a0bae952a8deba67" Name="Diagram1">
+        <EntityTypeShape EntityType="Kvantorium_ProjectModel.GetOborud" Width="1.5" PointX="5.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kvantorium_ProjectModel.Postav" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kvantorium_ProjectModel.Sotrud" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kvantorium_ProjectModel.UchetPostav" Width="1.5" PointX="4.75" PointY="2.375" IsExpanded="true" />
+        <AssociationConnector Association="Kvantorium_ProjectModel.FK_GetOborud_Postav" ManuallyRouted="false" />
+        <AssociationConnector Association="Kvantorium_ProjectModel.FK_GetOborud_Sotrud" ManuallyRouted="false" />
+        <AssociationConnector Association="Kvantorium_ProjectModel.FK_UchetPostav_Postav" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

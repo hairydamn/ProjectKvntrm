@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3c0faaad8e134f11846bf81de9580afb" Name="Diagram1">
+        <EntityTypeShape EntityType="Kvantorium_ProjectModel.Autorization" Width="1.5" PointX="1" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kvantorium_ProjectModel.GetOborudovanie" Width="1.5" PointX="7.375" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kvantorium_ProjectModel.Oborud" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kvantorium_ProjectModel.PeredachaOborud" Width="1.5" PointX="10.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kvantorium_ProjectModel.Postav" Width="1.5" PointX="7.625" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kvantorium_ProjectModel.Registration" Width="1.5" PointX="3.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kvantorium_ProjectModel.Sotrud" Width="1.5" PointX="10.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Kvantorium_ProjectModel.UchetPostav" Width="1.5" PointX="4.875" PointY="6.25" IsExpanded="true" />
+        <AssociationConnector Association="Kvantorium_ProjectModel.FK_Autorization_Registration1" ManuallyRouted="false" />
+        <AssociationConnector Association="Kvantorium_ProjectModel.FK_GetOborudovanie_Oborud" ManuallyRouted="false" />
+        <AssociationConnector Association="Kvantorium_ProjectModel.FK_GetOborudovanie_Postav" ManuallyRouted="false" />
+        <AssociationConnector Association="Kvantorium_ProjectModel.FK_GetOborudovanie_Sotrud" ManuallyRouted="false" />
+        <AssociationConnector Association="Kvantorium_ProjectModel.FK_PeredachaOborud_Oborud" ManuallyRouted="false" />
+        <AssociationConnector Association="Kvantorium_ProjectModel.FK_PeredachaOborud_Sotrud" ManuallyRouted="false" />
+        <AssociationConnector Association="Kvantorium_ProjectModel.FK_PeredachaOborud_Sotrud1" ManuallyRouted="false" />
+        <AssociationConnector Association="Kvantorium_ProjectModel.FK_UchetPostav_Postav" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
